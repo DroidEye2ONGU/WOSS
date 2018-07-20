@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<woss>
+	<gather class="droideye.woss.client.GatherImpl">
+		<data-file>src/droideye/file/radwtmp</data-file>
+	</gather>
+	
+	<client class="droideye.woss.client.ClientImpl">
+		<server-ip>127.0.0.1</server-ip>
+		<server-port>23333</server-port>
+	</client>
+	
+	<server class="droideye.woss.server.ServerImpl">
+		<port>23333</port>
+	</server>
+	
+	<dbstore class="droideye.woss.server.DBStoreImpl">
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@localhost:1521:XE</url>
+		<username>briup</username>
+		<password>briup</password>
+	</dbstore>
+	
+	<logger class="droideye.util.LoggerImpl">
+		<log-pro>src/droideye/file/log4j.properties</log-pro>
+	</logger>
+	
+	<backup class="droideye.util.BackUPImpl">
+		<back-path>src/droideye/file/</back-path>
+	</backup>
+</woss>

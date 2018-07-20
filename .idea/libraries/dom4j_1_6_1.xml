@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="dom4j-1.6.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/dom4j-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ojdbc14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/woss_interface.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
