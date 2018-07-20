@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.UUID;
@@ -41,6 +42,7 @@ public class DBStoreImpl implements DBStore {
     public void saveToDB(Collection<BIDR> collection) throws Exception {
         Class.forName(driver);
 
+
         Connection connection = DriverManager.getConnection(url, user, password);
         String today = getToday();
 
@@ -70,8 +72,12 @@ public class DBStoreImpl implements DBStore {
                 ps.executeUpdate();
 
 
-                // 故意制造一个异常来测试备份功能
+                // 故意制造异常来测试备份功能
                /* if (i == 6) {
+                    int a = 1 / 0;
+                }
+
+                if (i == 8) {
                     int a = 1 / 0;
                 }*/
 
@@ -81,11 +87,14 @@ public class DBStoreImpl implements DBStore {
                     e.printStackTrace();
                 }
             } catch (Exception e) {
-                BackUP backUP = new BackUPImpl();
+                ConfigurationImpl configuration = new ConfigurationImpl();
+
+                BackUP backUP = configuration.getBackup();
                 String uuid = UUID.randomUUID().toString();
+
                 backUP.store(uuid, b, true);
-                new ConfigurationImpl().getLogger().error("第" + i +
-                        "条数据入库时出现问题,入库中止.信息已备份,备份文件名:" + uuid);
+                configuration.getLogger().error("第" + i +
+                        "条数据入库时出现问题,入库中止.未入库信息已备份,备份文件名:" + uuid);
             }
 
             //System.out.println("第" + i + "条数据入库完毕...");
@@ -93,7 +102,7 @@ public class DBStoreImpl implements DBStore {
         }
 
         //System.out.println("全部数据入库完成");
-        new ConfigurationImpl().getLogger().info("全部数据入库完成");
+        new ConfigurationImpl().getLogger().info("数据入库完成");
 
 
         try {
